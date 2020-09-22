@@ -11,6 +11,8 @@ snake[0]= {
     y: 8 * box
 }
 
+let direction = "right";
+
 //Criação do canvas
 function criarBG() {
     context.fillStyle = "lightgreen";
@@ -24,5 +26,26 @@ function criarCobrinha(){
     }
 }
 
-criarBG();
-criarCobrinha()
+function iniciarJogo(){
+    criarBG();
+    criarCobrinha()
+
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    if(direction == "right") snakeX += box;
+    if(direction == "left") snakeX -= box;
+    if(direction == "up") snakeY -= box;
+    if(direction == "down") snakeY += box;
+
+    snake.pop();
+
+    let newHead = {
+        x: snakeX,
+        y: snakeY
+    }
+
+    snake.unshift(newHead);
+}
+// passando um intervalo de 100 ml para iniciar o jogo e a cada 100 ml estará sendo renovada
+let jogo = setInterval(iniciarJogo, 100);
